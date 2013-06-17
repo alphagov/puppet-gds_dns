@@ -1,0 +1,10 @@
+fixtures:
+  repositories:
+    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    hosts: "git://github.com/alphagov/puppet-hosts.git"
+    resolvconf: "git://github.com/alphagov/puppet-resolvconf.git"
+    dnsmasq:
+      repo: "git://github.com/alphagov/puppet-dnsmasq.git"
+      ref: "origin/gds_fork"
+  symlinks:
+    apache: "#{source_dir}"

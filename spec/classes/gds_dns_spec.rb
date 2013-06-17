@@ -1,12 +1,9 @@
 require 'spec_helper'
 
 describe 'gds_dns' do
-  let(:pre_condition) { <<EOS
-# Mock out dependencies
-class hosts {}
-class resolvconf {}
-EOS
-  }
+  let(:facts) {{
+    :osfamily => 'Debian',
+  }}
 
   context 'includes' do
     it { should include_class('hosts') }

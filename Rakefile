@@ -1,12 +1,8 @@
 # Ignore vendored code.
 exclude_paths = ["vendor/**/*"]
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = 'spec/*/*_spec.rb'
-end
-
-require 'puppet-lint/tasks/puppet-lint'
+require 'puppetlabs_spec_helper/rake_tasks'
+require 'puppet-lint'
 PuppetLint.configuration.ignore_paths = exclude_paths
 
 require 'puppet-syntax/tasks/puppet-syntax'
