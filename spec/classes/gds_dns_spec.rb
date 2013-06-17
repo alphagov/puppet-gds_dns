@@ -7,6 +7,28 @@ describe 'gds_dns' do
 
   context 'includes' do
     it { should include_class('hosts') }
-    it { should include_class('resolvconf') }
+    it { should contain_class('resolvconf').with_use_local(true) }
+  end
+
+  context 'server false' do
+    it {
+      should contain_class('gds_dns::client').with(
+        :before  => 'Class[Resolvconf]',
+        :require => 'Class[Hosts]', 
+      )
+    }
+  end
+
+  context 'server true' do
+    let(:params) {{
+      :server => true,
+    }}
+
+    it {
+      should contain_class('gds_dns::server').with(
+        :before  => 'Class[Resolvconf]',
+        :require => 'Class[Hosts]', 
+      )
+    }
   end
 end

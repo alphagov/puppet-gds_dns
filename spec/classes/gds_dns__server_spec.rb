@@ -5,5 +5,5 @@ describe 'gds_dns::server' do
     :osfamily => 'Debian',
   }}
 
-  it { should contain_class('dnsmasq::server').with_require('Class[Gds_dns]') }
+  it { should contain_class('dnsmasq::server') }
 end
