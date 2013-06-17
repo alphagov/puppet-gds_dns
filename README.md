@@ -6,3 +6,4 @@ Depends on:
 
 - puppet-hosts
 - puppet-resolvconf
+- puppet-dnsmasq
