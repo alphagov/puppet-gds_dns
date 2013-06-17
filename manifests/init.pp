@@ -23,6 +23,10 @@ class gds_dns(
     use_local => true,
   }
 
+  class { 'dnsmasq':
+    ignore_resolvconf => true,
+  }
+
   $sub_class = $server ? {
     true    => 'server',
     default => 'client',
