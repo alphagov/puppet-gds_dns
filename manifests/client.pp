@@ -1,7 +1,10 @@
 # = Class: gds_dns::client
 #
-# Wrapper for dnsmasq::client.
+# Configure dnsmasq to serve as a local forwarder/resolver on loopback.
 #
 class gds_dns::client {
-  class { 'dnsmasq::client': }
+  dnsmasq::conf { 'client':
+    ensure => present,
+    source => 'puppet:///modules/gds_dns/dnsmasq/client.conf',
+  }
 }

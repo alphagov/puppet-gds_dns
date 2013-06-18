@@ -11,6 +11,10 @@ describe 'gds_dns' do
     it { should contain_class('dnsmasq').with_ignore_resolvconf(true) }
   end
 
+  context 'dnsmasq defaults' do
+    it { should contain_dnsmasq__conf('defaults') }
+  end
+
   context 'server param' do
     context 'server false' do
       it {

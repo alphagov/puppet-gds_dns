@@ -27,6 +27,11 @@ class gds_dns(
     ignore_resolvconf => true,
   }
 
+  dnsmasq::conf { 'defaults':
+    ensure => present,
+    source => 'puppet:///modules/gds_dns/dnsmasq/defaults.conf',
+  }
+
   $sub_class = $server ? {
     true    => 'server',
     default => 'client',
