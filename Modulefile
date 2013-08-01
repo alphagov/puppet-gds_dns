@@ -11,4 +11,4 @@ dependency 'puppetlabs/stdlib', '>= 0'
 # FIXME: Not yet published.
 #dependency 'gdsoperations/dnsmasq', '>= 0'
 dependency 'gdsoperations/hosts', '>= 0'
-dependency 'gdsoperations/resolvconf', '>= 0'
+dependency 'gdsoperations/resolvconf', '>= 0.3.0'
