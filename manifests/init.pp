@@ -36,7 +36,8 @@ class gds_dns(
   }
 
   class { "gds_dns::${sub_class}":
-    require => [Class['resolvconf'],Class['hosts']],
+    before  => Class['resolvconf'],
+    require => Class['hosts'],
   }
 
 }
