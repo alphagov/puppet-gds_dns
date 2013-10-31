@@ -23,9 +23,7 @@ class gds_dns(
     use_local => true,
   }
 
-  class { 'dnsmasq':
-    ignore_resolvconf => true,
-  }
+  include dnsmasq
 
   dnsmasq::conf { 'defaults':
     ensure => present,
