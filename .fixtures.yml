@@ -5,6 +5,6 @@ fixtures:
     resolvconf: "git://github.com/alphagov/puppet-resolvconf.git"
     dnsmasq:
       repo: "git://github.com/alphagov/puppet-dnsmasq.git"
-      ref: "origin/upstart"
+      ref: "origin/gds_fork"
   symlinks:
     apache: "#{source_dir}"
