@@ -3,8 +3,12 @@
 # GDS internal module for managing DNS.
 #
 # Pulls in the following modules:
+#   - dnsmasq
 #   - hosts
 #   - resolvconf
+#
+# Use the dnsmasq::upstreams::upstream_servers hiera key to inject
+# upstream DNS servers for a host.
 #
 # == Parameters:
 #
@@ -13,8 +17,13 @@
 #   is included. If false, `gds_dns::client` is included.
 #   Default: false
 #
+# [*upstream_servers*]
+#   An ordered array of upstream DNS servers to proxy.
+#   Default: []
+#
 class gds_dns(
-  $server = false
+  $server           = false,
+  $upstream_servers = [],
 ) {
 
   include ::hosts
@@ -23,8 +32,8 @@ class gds_dns(
     use_local => true,
   }
 
-  class { 'dnsmasq':
-    ignore_resolvconf => true,
+  class {'dnsmasq':
+    upstream_servers => $upstream_servers,
   }
 
   dnsmasq::conf { 'defaults':
