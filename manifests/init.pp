@@ -17,8 +17,13 @@
 #   is included. If false, `gds_dns::client` is included.
 #   Default: false
 #
+# [*upstream_servers*]
+#   An ordered array of upstream DNS servers to proxy.
+#   Default: []
+#
 class gds_dns(
-  $server = false
+  $server           = false,
+  $upstream_servers = [],
 ) {
 
   include ::hosts
@@ -27,7 +32,9 @@ class gds_dns(
     use_local => true,
   }
 
-  include dnsmasq::upstreams
+  class {'dnsmasq':
+    upstream_servers => $upstream_servers,
+  }
 
   dnsmasq::conf { 'defaults':
     ensure => present,
