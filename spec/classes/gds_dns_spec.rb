@@ -8,7 +8,7 @@ describe 'gds_dns' do
   context 'includes' do
     it { should include_class('hosts') }
     it { should contain_class('resolvconf').with_use_local(true) }
-    it { should contain_class('dnsmasq').with_ignore_resolvconf(true) }
+    it { should contain_class('dnsmasq::upstreams') }
   end
 
   context 'dnsmasq defaults' do
