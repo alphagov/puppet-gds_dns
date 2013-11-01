@@ -3,8 +3,12 @@
 # GDS internal module for managing DNS.
 #
 # Pulls in the following modules:
+#   - dnsmasq
 #   - hosts
 #   - resolvconf
+#
+# Use the dnsmasq::upstreams::upstream_servers hiera key to inject
+# upstream DNS servers for a host.
 #
 # == Parameters:
 #
@@ -23,7 +27,7 @@ class gds_dns(
     use_local => true,
   }
 
-  include dnsmasq
+  include dnsmasq::upstreams
 
   dnsmasq::conf { 'defaults':
     ensure => present,
