@@ -4,7 +4,6 @@
 #
 # Pulls in the following modules:
 #   - dnsmasq
-#   - hosts
 #   - resolvconf
 #
 # Use the dnsmasq::upstreams::upstream_servers hiera key to inject
@@ -26,8 +25,6 @@ class gds_dns(
   $upstream_servers = [],
 ) {
 
-  include ::hosts
-
   class { '::resolvconf':
     use_local => true,
   }
@@ -47,8 +44,7 @@ class gds_dns(
   }
 
   class { "gds_dns::${sub_class}":
-    before  => Class['resolvconf'],
-    require => Class['hosts'],
+    before => Class['resolvconf'],
   }
 
 }

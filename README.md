@@ -4,6 +4,5 @@ GDS internal module for managing DNS.
 
 Depends on:
 
-- puppet-hosts
 - puppet-resolvconf
 - puppet-dnsmasq
