@@ -19,17 +19,28 @@
 #   views of external IP addresses.
 #   Default: {}
 #
+# [*options*]
+#   Hash of server config options to include in the DNSmasq configuration for authoritative servers.
+#   Default:
+#     server_options:
+#       domain-needed: ''
+#       bogus-priv: ''
+#
+
+
 class gds_dns::server(
-  $hosts = '',
-  $cnames = {},
-  $aliases = {}
-) {
+  $hosts   = '',
+  $cnames  = {},
+  $aliases = {},
+  $options = $gds_dns::params::server_options,
+) inherits gds_dns::params {
+
   validate_hash($cnames)
   validate_hash($aliases)
 
   dnsmasq::conf { 'server':
-    ensure => present,
-    source => 'puppet:///modules/gds_dns/dnsmasq/server.conf',
+    ensure  => present,
+    content => template('gds_dns/dnsmasq/config_options.conf.erb'),
   }
 
   file { '/etc/hosts.dnsmasq':
