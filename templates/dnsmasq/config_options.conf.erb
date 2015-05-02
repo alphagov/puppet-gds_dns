@@ -1,0 +1,5 @@
+# Puppet managed options
+
+<%- @options.sort.each do |key, val| -%>
+<%= key %><%- if val != '' -%>=<%= val %><%- end %>
+<%- end -%>

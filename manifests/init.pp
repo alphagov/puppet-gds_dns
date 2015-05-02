@@ -20,10 +20,20 @@
 #   An ordered array of upstream DNS servers to proxy.
 #   Default: []
 #
+# [*options*]
+#   Default config options for the server.
+#   Default:
+#     options:
+#       no-negcache: ''
+#       strict-order: ''
+#       cache-size: '15000'
+#       no-hosts: ''
+
 class gds_dns(
   $server           = false,
   $upstream_servers = [],
-) {
+  $options          = $gds_dns::params::default_options,
+) inherits gds_dns::params {
 
   class { '::resolvconf':
     use_local => true,
@@ -34,8 +44,8 @@ class gds_dns(
   }
 
   dnsmasq::conf { 'defaults':
-    ensure => present,
-    source => 'puppet:///modules/gds_dns/dnsmasq/defaults.conf',
+    ensure  => present,
+    content => template('gds_dns/dnsmasq/config_options.conf.erb'),
   }
 
   $sub_class = $server ? {
